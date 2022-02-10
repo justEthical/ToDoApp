@@ -14,11 +14,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            _topBar(),
-            _bigText(),
-            //_categories()
-          ],
+          children: [_topBar(), _bigText(), _categories()],
         ),
       ),
     );
@@ -55,25 +51,29 @@ class _TodoListScreenState extends State<TodoListScreen> {
   }
 
   _categories() {
+    var w = MediaQuery.of(context).size.width;
     return Container(
-      width: MediaQuery.of(context).size.width,
-
-      padding: EdgeInsets.only(left: 30, top: 20),
+      width: w,
+      height: 230,
+      //color: Colors.blue,
+      //padding: const EdgeInsets.only(left: 30, top: 20),
       child: Column(
-        //mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
+            width: w - 30,
+            padding: EdgeInsets.only(left: 30, top: 10),
             //color: Colors.red,
-            child: Text(
+            child: const Text(
               "CATEGORIES",
-              style: TextStyle(fontSize: 17, color: Colors.grey),
+              style: TextStyle(fontSize: 17, color: Colors.grey, fontWeight: FontWeight.bold),
             ),
           ),
 
-          ListView()
+          ListView(
+            
+          )
         ],
-
-      
       ),
     );
   }
