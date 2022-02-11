@@ -145,14 +145,19 @@ class _TodoListScreenState extends State<TodoListScreen> {
           return const Center(
               child: Text(
             "No data available!",
-            //style: TextStyle(fontFamily: 'Montserrat')),
-          ));
+            style: TextStyle(fontFamily: 'Montserrat')),
+          );
         }
         return ListView.builder(
             itemCount: box.length,
             itemBuilder: (context, index) {
               Todo todo = box.getAt(index)!;
-              return _taskTile(todo);
+              return Dismissible(
+                  onDismissed: (direction) async {
+                    await box.deleteAt(index);
+                  },
+                  key: Key(todo.title!),
+                  child: _taskTile(todo));
               // return ListTile(
               //   onLongPress: () async {
               //     await box.deleteAt(index);
