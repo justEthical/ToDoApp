@@ -15,14 +15,22 @@ class _AddTodoState extends State<AddTodo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-          onPressed: () {
+      floatingActionButton: GestureDetector(
+          onTap: () {
             var tsk = task.text;
-            if (tsk != '' && tsk != null) {
-              _submitTodo(tsk);
+            if (tsk != "" && tsk != null) {
+              Box<Todo> todoBox = Hive.box<Todo>('todos');
+              todoBox.add(Todo(title: tsk, done: false));
+              Navigator.of(context).pop();
             }
           },
-          child: Text("save todo")),
+          child: _addTaskFloatingActionButton()),
+
+      // FloatingActionButton(
+      //     onPressed: () {
+
+      //     },
+      //     child: Text("save todo")),
       body: Column(
         children: [_topBar(), _addTodoTextField()],
       ),
@@ -69,5 +77,20 @@ class _AddTodoState extends State<AddTodo> {
         ),
       ),
     ));
+  }
+
+  _addTaskFloatingActionButton() {
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(25), color: Colors.blue),
+      width: 150,
+      height: 50,
+      padding: EdgeInsets.all(12),
+      child: Center(
+          child: Text(
+        "Add Task to list",
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+      )),
+    );
   }
 }
