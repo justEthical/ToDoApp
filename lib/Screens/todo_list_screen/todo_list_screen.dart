@@ -206,6 +206,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
               padding: EdgeInsets.only(left: 10),
               child: Text(
                 task.title,
+                overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                     fontSize: 20,
                     color:

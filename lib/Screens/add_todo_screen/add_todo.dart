@@ -65,16 +65,17 @@ class _AddTodoState extends State<AddTodo> {
       padding: const EdgeInsets.all(20.0),
       child: Center(
         child: TextField(
-          controller: task,
-          style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-              color: Colors.grey.withOpacity(0.1)),
-          decoration: const InputDecoration(
-              border: InputBorder.none,
-              //labelText: 'Enter Name',
-              hintText: 'Enter New Task'),
-        ),
+            controller: task,
+            style: TextStyle(fontSize: 30),
+            decoration: InputDecoration(
+                border: InputBorder.none,
+                //labelText: 'Enter Name',
+                hintText: 'Enter New Task',
+                hintStyle: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey.withOpacity(0.5),
+                ))),
       ),
     ));
   }
