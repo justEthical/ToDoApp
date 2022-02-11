@@ -1,4 +1,8 @@
 import 'package:aitra_todo/Screens/add_todo_screen/add_todo.dart';
+import 'package:aitra_todo/Screens/todo_list_screen/Widgets/app_bar.dart';
+import 'package:aitra_todo/Screens/todo_list_screen/Widgets/big_text.dart';
+import 'package:aitra_todo/Screens/todo_list_screen/Widgets/categories.dart';
+import 'package:aitra_todo/Screens/todo_list_screen/Widgets/todos.dart';
 import 'package:aitra_todo/adapters/todo_adapter.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -20,15 +24,15 @@ class _TodoListScreenState extends State<TodoListScreen> {
             Navigator.push(
                 context, MaterialPageRoute(builder: (ctx) => const AddTodo()));
           },
-          child: Icon(Icons.add)),
+          child: const Icon(Icons.add)),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            _topBar(),
-            _bigText(),
-            _categories(),
-            Expanded(child: _todoList())
+          children: const [
+            CustomAppBar(),
+            BigText(),
+            Categories(),
+            Expanded(child: TodosView())
           ],
         ),
       ),
@@ -65,77 +69,76 @@ class _TodoListScreenState extends State<TodoListScreen> {
         ));
   }
 
-  _categories() {
-    var w = MediaQuery.of(context).size.width;
-    return Container(
-      width: w,
-      height: 180,
-      //color: Colors.green,
-      //padding: const EdgeInsets.only(left: 30, top: 20),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Container(
-            width: w - 30,
-            padding: EdgeInsets.only(left: 25, top: 10),
-            //color: Colors.red,
-            child: const Text(
-              "CATEGORIES",
-              style: TextStyle(
-                  fontSize: 17,
-                  color: Colors.grey,
-                  fontWeight: FontWeight.bold),
-            ),
-          ),
+  // _categories() {
+  //   return Container(
+  //     width: w,
+  //     height: 180,
+  //     //color: Colors.green,
+  //     //padding: const EdgeInsets.only(left: 30, top: 20),
+  //     child: Column(
+  //       mainAxisAlignment: MainAxisAlignment.start,
+  //       children: [
+  //         Container(
+  //           width: w - 30,
+  //           padding: EdgeInsets.only(left: 25, top: 10),
+  //           //color: Colors.red,
+  //           child: const Text(
+  //             "CATEGORIES",
+  //             style: TextStyle(
+  //                 fontSize: 17,
+  //                 color: Colors.grey,
+  //                 fontWeight: FontWeight.bold),
+  //           ),
+  //         ),
 
-          // Expanded(
-          //     child: Container(
-          //   padding: EdgeInsets.only(
-          //     left: 30,
-          //   ),
-          //   child: Row(
-          //     children: [
-          //       Card(
-          //           elevation: 5,
-          //           child: Container(
-          //               width: 170, height: 150, color: Colors.redAccent)),
-          //       Card(
-          //           elevation: 5,
-          //           child: Container(
-          //             width: 170,
-          //             height: 150,
-          //             color: Colors.blue,
-          //           ))
-          //     ],
-          //   ),
-          // ))
+  //         // Expanded(
+  //         //     child: Container(
+  //         //   padding: EdgeInsets.only(
+  //         //     left: 30,
+  //         //   ),
+  //         //   child: Row(
+  //         //     children: [
+  //         //       Card(
+  //         //           elevation: 5,
+  //         //           child: Container(
+  //         //               width: 170, height: 150, color: Colors.redAccent)),
+  //         //       Card(
+  //         //           elevation: 5,
+  //         //           child: Container(
+  //         //             width: 170,
+  //         //             height: 150,
+  //         //             color: Colors.blue,
+  //         //           ))
+  //         //     ],
+  //         //   ),
+  //         // ))
 
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 30),
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                //shrinkWrap: true,
-                children: [
-                  Card(
-                      elevation: 5,
-                      child: Container(
-                          width: 170, height: 150, color: Colors.redAccent)),
-                  Card(
-                      elevation: 5,
-                      child: Container(
-                        width: 170,
-                        height: 150,
-                        color: Colors.blue,
-                      ))
-                ],
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
+  //         Expanded(
+  //           child: Padding(
+  //             padding: const EdgeInsets.only(left: 30),
+  //             child: ListView(
+  //               scrollDirection: Axis.horizontal,
+  //               //shrinkWrap: true,
+  //               children: [
+  //                 Card(
+  //                     elevation: 5,
+  //                     child: Container(
+  //                         width: 170, height: 150, color: Colors.redAccent)),
+  //                 Card(
+  //                     elevation: 5,
+  //                     child: Container(
+  //                       width: 170,
+  //                       height: 150,
+  //                       color: Colors.blue,
+  //                     ))
+  //               ],
+  //             ),
+  //           ),
+  //         )
+  //       ],
+  //     ),
+  //   );
+  // }
 
   _todoList() {
     return ValueListenableBuilder(
@@ -143,9 +146,8 @@ class _TodoListScreenState extends State<TodoListScreen> {
       builder: (context, Box<Todo> box, _) {
         if (box.values.isEmpty) {
           return const Center(
-              child: Text(
-            "No data available!",
-            style: TextStyle(fontFamily: 'Montserrat')),
+            child: Text("No data available!",
+                style: TextStyle(fontFamily: 'Montserrat')),
           );
         }
         return ListView.builder(
