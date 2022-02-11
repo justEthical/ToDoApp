@@ -1,3 +1,4 @@
+import 'package:aitra_todo/Screens/add_todo_screen/add_todo.dart';
 import 'package:flutter/material.dart';
 
 class TodoListScreen extends StatefulWidget {
@@ -11,6 +12,12 @@ class _TodoListScreenState extends State<TodoListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (ctx) => const AddTodo()));
+          },
+          child: Icon(Icons.add)),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -54,24 +61,68 @@ class _TodoListScreenState extends State<TodoListScreen> {
     var w = MediaQuery.of(context).size.width;
     return Container(
       width: w,
-      height: 230,
-      //color: Colors.blue,
+      height: 180,
+      //color: Colors.green,
       //padding: const EdgeInsets.only(left: 30, top: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
             width: w - 30,
-            padding: EdgeInsets.only(left: 30, top: 10),
+            padding: EdgeInsets.only(left: 25, top: 10),
             //color: Colors.red,
             child: const Text(
               "CATEGORIES",
-              style: TextStyle(fontSize: 17, color: Colors.grey, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 17,
+                  color: Colors.grey,
+                  fontWeight: FontWeight.bold),
             ),
           ),
 
-          ListView(
-            
+          // Expanded(
+          //     child: Container(
+          //   padding: EdgeInsets.only(
+          //     left: 30,
+          //   ),
+          //   child: Row(
+          //     children: [
+          //       Card(
+          //           elevation: 5,
+          //           child: Container(
+          //               width: 170, height: 150, color: Colors.redAccent)),
+          //       Card(
+          //           elevation: 5,
+          //           child: Container(
+          //             width: 170,
+          //             height: 150,
+          //             color: Colors.blue,
+          //           ))
+          //     ],
+          //   ),
+          // ))
+
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 30),
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                //shrinkWrap: true,
+                children: [
+                  Card(
+                      elevation: 5,
+                      child: Container(
+                          width: 170, height: 150, color: Colors.redAccent)),
+                  Card(
+                      elevation: 5,
+                      child: Container(
+                        width: 170,
+                        height: 150,
+                        color: Colors.blue,
+                      ))
+                ],
+              ),
+            ),
           )
         ],
       ),
